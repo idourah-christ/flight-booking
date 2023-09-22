@@ -34,24 +34,6 @@ def index(request):
     except requests.exceptions:
         return Response({"message":"Error fetching flight"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-      
-@api_view(['POST'])
-def booking(request):
-    post_data = request.data
-    flight_name = post_data.get("flight", None)
-    date = post_data.get("date", None)
-    
-    if flight_name == None:
-        return Response({"message":"Missing fields"},status=status.HTTP_400_BAD_REQUEST)
-
-    booking = {"flight":flight_name, "date":date}
-    bookings.append(booking)
-    return Response({"message":"Booking success"},status=status.HTTP_200_OK)
-
-@api_view(['GET'])
-def get_currency_view(request):
-    currencies = {"data":get_currency(currency_path)}
-    return Response(currencies)
 
         
 
